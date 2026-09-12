@@ -1,0 +1,69 @@
+# 书海 ShuHai —— 一键部署
+#
+#   docker compose up -d --build
+#   然后打开 http://<你的主机IP>:8080
+#
+# 数据保存在 ./data 目录（SQLite 数据库 + 书源 + 书架 + 阅读进度）。
+
+services:
+  shuhai:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: shuhai:1.0.0
+    container_name: shuhai
+    restart: unless-stopped
+
+    ports:
+      # 左边是宿主机端口，改这里即可换端口
+      - "${SHUHAI_PUBLISH_PORT:-8080}:8080"
+
+    environment:
+      # ---- 服务 ----
+      SHUHAI_HOST: "0.0.0.0"
+      SHUHAI_PORT: "8080"
+      SHUHAI_DB: "/data/shuhai.db"
+      TZ: "${TZ:-Asia/Shanghai}"
+
+      # ---- 搜索行为 ----
+      # 同时并发请求多少个书源（太大会被站点风控，建议 8~24）
+      SHUHAI_SEARCH_CONCURRENCY: "${SHUHAI_SEARCH_CONCURRENCY:-16}"
+      # 单个书源请求超时（毫秒）
+      SHUHAI_TIMEOUT: "${SHUHAI_TIMEOUT:-15000}"
+      # 同一站点的最小请求间隔（毫秒），防止把对方站点打挂
+      SHUHAI_HOST_INTERVAL_MS: "${SHUHAI_HOST_INTERVAL_MS:-120}"
+      # 目录最大翻页数 / 正文最大翻页数
+      SHUHAI_MAX_TOC_PAGES: "${SHUHAI_MAX_TOC_PAGES:-30}"
+      SHUHAI_MAX_CONTENT_PAGES: "${SHUHAI_MAX_CONTENT_PAGES:-6}"
+      # 书源内嵌 JS 的执行超时（毫秒）
+      SHUHAI_JS_TIMEOUT: "${SHUHAI_JS_TIMEOUT:-3000}"
+      # 内存日志条数
+      SHUHAI_LOG_SIZE: "${SHUHAI_LOG_SIZE:-500}"
+
+    volumes:
+      - ./data:/data
+
+    # 如果书源站点在宿主机上（例如本地测试夹具），取消下面注释
+    # extra_hosts:
+    #   - "host.docker.internal:host-gateway"
+
+    healthcheck:
+      test: ["CMD", "node", "-e", "fetch('http://127.0.0.1:8080/api/health').then(r=>process.exit(r.ok?0:1)).catch(()=>process.exit(1))"]
+      interval: 30s
+      timeout: 5s
+      start_period: 10s
+      retries: 3
+
+    # 资源限制（按需调整；缓存整本书时会占一些内存）
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+        reservations:
+          memory: 128M
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"

@@ -1,0 +1,280 @@
+[
+  {
+    "bookSourceName": "本地测试源-UTF8",
+    "bookSourceGroup": "本地测试,UTF8,端到端",
+    "bookSourceUrl": "http://127.0.0.1:18080",
+    "bookSourceType": 0,
+    "bookSourceComment": "离线 mock 站点(test/mock-site/server.mjs)的 UTF-8 数据流。搜索页用 ?charset=utf8 取 UTF-8 版本；详情/目录/正文页默认即 UTF-8，因此链接干净。用于验证: 搜索->详情->目录(含分页)->正文(含广告清洗)全链路。",
+    "customOrder": 1,
+    "enabled": true,
+    "enabledExplore": true,
+    "weight": 100,
+    "lastUpdateTime": 1735689600000,
+    "respondTime": 0,
+    "bookUrlPattern": "127.0.0.1:18080/book/",
+    "header": "",
+    "searchUrl": "http://127.0.0.1:18080/search?q={{key}}&page={{page}}&charset=utf8",
+    "exploreUrl": "全部书籍::/search?q=&page={{page}}&charset=utf8\n玄幻::/search?q=玄幻&page={{page}}&charset=utf8",
+    "ruleSearch": {
+      "bookList": "class.book-list@class.book-item",
+      "name": "class.book-name@tag.a@text",
+      "author": "class.author@text##作者：##",
+      "kind": "class.kind@text##分类：##",
+      "wordCount": "class.word-count@text##字数：##",
+      "intro": "class.intro@text",
+      "lastChapter": "class.last-chapter@tag.a@text##最新章节：##",
+      "coverUrl": "class.cover@tag.img@src",
+      "bookUrl": "class.book-name@tag.a@href"
+    },
+    "ruleExplore": {
+      "bookList": "class.book-list@class.book-item",
+      "name": "class.book-name@tag.a@text",
+      "author": "class.author@text##作者：##",
+      "kind": "class.kind@text##分类：##",
+      "wordCount": "class.word-count@text##字数：##",
+      "intro": "class.intro@text",
+      "lastChapter": "class.last-chapter@tag.a@text##最新章节：##",
+      "coverUrl": "class.cover@tag.img@src",
+      "bookUrl": "class.book-name@tag.a@href"
+    },
+    "ruleBookInfo": {
+      "init": "",
+      "name": "class.book-title@text",
+      "author": "class.author@text",
+      "kind": "class.kind@text##分类：##",
+      "wordCount": "class.word-count@text##字数：##",
+      "status": "class.status@text##状态：##",
+      "intro": "id.intro@text",
+      "coverUrl": "class.book-cover@src",
+      "tocUrl": "class.toc@href",
+      "lastChapter": "class.last-chapter@tag.a@text##最新章节：##"
+    },
+    "ruleToc": {
+      "chapterList": "class.chapter-list@tag.ul@tag.li",
+      "chapterName": "tag.a@text",
+      "chapterUrl": "tag.a@href",
+      "nextTocUrl": "class.pager@class.next@href"
+    },
+    "ruleContent": {
+      "content": "id.content@html##<p[^>]*>(?:本站域名|手机用户请浏览|笔趣阁)[^<]*</p>##",
+      "title": "class.chapter-title@text",
+      "nextContentUrl": "id.next@href"
+    }
+  },
+  {
+    "bookSourceName": "本地测试源-GBK",
+    "bookSourceGroup": "本地测试,GBK,编码",
+    "bookSourceUrl": "http://127.0.0.1:18080",
+    "bookSourceType": 0,
+    "bookSourceComment": "GBK 编码源。1) 搜索走 /gbk-search，默认 GBK 字节输出；2) 搜索 URL 后缀 JSON 带 charset=gbk，要求引擎用 GBK 对 {{key}} 做百分号编码（真实 GBK 站点的做法）；3) mock 站点会让页面内链接继承 ?charset=gbk，因此详情/目录/正文全程 GBK。若关键字被按 UTF-8 编码，mock 会回退匹配并在页面上打印 class=\"warn\" 提示。",
+    "customOrder": 2,
+    "enabled": true,
+    "enabledExplore": true,
+    "weight": 90,
+    "lastUpdateTime": 1735689600000,
+    "respondTime": 0,
+    "charset": "gbk",
+    "bookSourceCharset": "gbk",
+    "header": "",
+    "searchUrl": "http://127.0.0.1:18080/gbk-search?q={{key}}&page={{page}},{\"charset\":\"gbk\"}",
+    "exploreUrl": "全部书籍::/gbk-search?q=&page={{page}}\n玄幻::/gbk-search?q=玄幻&page={{page}}",
+    "ruleSearch": {
+      "bookList": "class.book-list@class.book-item",
+      "name": "class.book-name@tag.a@text",
+      "author": "class.author@text##作者：##",
+      "kind": "class.kind@text##分类：##",
+      "wordCount": "class.word-count@text##字数：##",
+      "intro": "class.intro@text",
+      "lastChapter": "class.last-chapter@tag.a@text##最新章节：##",
+      "coverUrl": "class.cover@tag.img@src",
+      "bookUrl": "class.book-name@tag.a@href"
+    },
+    "ruleExplore": {
+      "bookList": "class.book-list@class.book-item",
+      "name": "class.book-name@tag.a@text",
+      "author": "class.author@text##作者：##",
+      "kind": "class.kind@text##分类：##",
+      "wordCount": "class.word-count@text##字数：##",
+      "intro": "class.intro@text",
+      "lastChapter": "class.last-chapter@tag.a@text##最新章节：##",
+      "coverUrl": "class.cover@tag.img@src",
+      "bookUrl": "class.book-name@tag.a@href"
+    },
+    "ruleBookInfo": {
+      "init": "",
+      "name": "class.book-title@text",
+      "author": "class.author@text",
+      "kind": "class.kind@text##分类：##",
+      "wordCount": "class.word-count@text##字数：##",
+      "status": "class.status@text##状态：##",
+      "intro": "id.intro@text",
+      "coverUrl": "class.book-cover@src",
+      "tocUrl": "class.toc@href",
+      "lastChapter": "class.last-chapter@tag.a@text##最新章节：##"
+    },
+    "ruleToc": {
+      "chapterList": "class.chapter-list@tag.ul@tag.li",
+      "chapterName": "tag.a@text",
+      "chapterUrl": "tag.a@href",
+      "nextTocUrl": "class.pager@class.next@href"
+    },
+    "ruleContent": {
+      "content": "id.content@html##<p[^>]*>(?:本站域名|手机用户请浏览|笔趣阁)[^<]*</p>##",
+      "title": "class.chapter-title@text",
+      "nextContentUrl": "id.next@href"
+    }
+  },
+  {
+    "bookSourceName": "本地测试源-POST",
+    "bookSourceGroup": "本地测试,POST",
+    "bookSourceUrl": "http://127.0.0.1:18080",
+    "bookSourceType": 0,
+    "bookSourceComment": "POST 搜索源。searchUrl 使用 legado 的 URL 选项形式 url,{json}: method=POST, body=q={{key}}&page={{page}}。mock 站点同时支持 GET/POST /search，POST 也读取 charset 参数。用于验证 URL 后缀 JSON 解析、body 中 {{key}}/{{page}} 替换、表单编码。",
+    "customOrder": 3,
+    "enabled": true,
+    "enabledExplore": false,
+    "weight": 80,
+    "lastUpdateTime": 1735689600000,
+    "respondTime": 0,
+    "header": "",
+    "searchUrl": "http://127.0.0.1:18080/search?charset=utf8,{\"method\":\"POST\",\"body\":\"q={{key}}&page={{page}}\",\"headers\":{\"Content-Type\":\"application/x-www-form-urlencoded\"}}",
+    "exploreUrl": "",
+    "ruleSearch": {
+      "bookList": "class.book-list@class.book-item",
+      "name": "class.book-name@tag.a@text",
+      "author": "class.author@text##作者：##",
+      "kind": "class.kind@text##分类：##",
+      "wordCount": "class.word-count@text##字数：##",
+      "intro": "class.intro@text",
+      "lastChapter": "class.last-chapter@tag.a@text##最新章节：##",
+      "coverUrl": "class.cover@tag.img@src",
+      "bookUrl": "class.book-name@tag.a@href"
+    },
+    "ruleExplore": {},
+    "ruleBookInfo": {
+      "init": "",
+      "name": "class.book-title@text",
+      "author": "class.author@text",
+      "kind": "class.kind@text##分类：##",
+      "wordCount": "class.word-count@text##字数：##",
+      "status": "class.status@text##状态：##",
+      "intro": "id.intro@text",
+      "coverUrl": "class.book-cover@src",
+      "tocUrl": "class.toc@href",
+      "lastChapter": "class.last-chapter@tag.a@text##最新章节：##"
+    },
+    "ruleToc": {
+      "chapterList": "class.chapter-list@tag.ul@tag.li",
+      "chapterName": "tag.a@text",
+      "chapterUrl": "tag.a@href",
+      "nextTocUrl": "class.pager@class.next@href"
+    },
+    "ruleContent": {
+      "content": "id.content@html##<p[^>]*>(?:本站域名|手机用户请浏览|笔趣阁)[^<]*</p>##",
+      "title": "class.chapter-title@text",
+      "nextContentUrl": "id.next@href"
+    }
+  },
+  {
+    "bookSourceName": "本地测试源-坏规则",
+    "bookSourceGroup": "本地测试,异常",
+    "bookSourceUrl": "http://127.0.0.1:18080",
+    "bookSourceType": 0,
+    "bookSourceComment": "故意写错规则的源，用于验证规则引擎的错误处理不崩溃：searchUrl 页面本身是正常的 HTML，但 bookList 指向不存在的 class、部分规则含未闭合非法正则、tocUrl 指向 404 的书籍、content 指向不存在的 id、chapterUrl 为空。预期: 单源失败不影响其它源，聚合搜索仍返回其它源的结果，接口返回可读错误而不是 500/崩溃。",
+    "customOrder": 4,
+    "enabled": true,
+    "enabledExplore": false,
+    "weight": 10,
+    "lastUpdateTime": 1735689600000,
+    "respondTime": 0,
+    "header": "",
+    "searchUrl": "http://127.0.0.1:18080/search?q={{key}}&page={{page}}&charset=utf8",
+    "exploreUrl": "",
+    "ruleSearch": {
+      "bookList": "class.this-class-does-not-exist@tag.div",
+      "name": "class.book-name@tag.a@text##[unclosed##",
+      "author": "class.author@text@@@@@@",
+      "kind": "class.kind@text##((((##",
+      "wordCount": "class.word-count@text##字数：##",
+      "intro": "id.intro-not-exist@text",
+      "lastChapter": "class.last-chapter@tag.a@@@text",
+      "coverUrl": "class.cover@tag.img@data-src",
+      "bookUrl": "class.book-name@tag.a@href@js:throw new Error('mock-source-broken-rule')"
+    },
+    "ruleExplore": {},
+    "ruleBookInfo": {
+      "init": "",
+      "name": "class.book-title@text##[a-##",
+      "author": "class.author@@@text",
+      "kind": "class.kind@text##分类：##",
+      "wordCount": "class.word-count@text##字数：##",
+      "status": "class.status@text##状态：##",
+      "intro": "id.intro-not-exist@text",
+      "coverUrl": "class.book-cover@src-not-exist",
+      "tocUrl": "/book/9999/chapters",
+      "lastChapter": "class.last-chapter@tag.a@text"
+    },
+    "ruleToc": {
+      "chapterList": "class.chapter-list-not-exist@tag.li",
+      "chapterName": "tag.a@@text",
+      "chapterUrl": "",
+      "nextTocUrl": "class.pager@class.next@href##[bad##"
+    },
+    "ruleContent": {
+      "content": "id.content-not-exist@html##((((##",
+      "title": "class.chapter-title@text##[unclosed##",
+      "nextContentUrl": "id.next-not-exist@href"
+    }
+  },
+  {
+    "bookSourceName": "本地测试源-坏站点500",
+    "bookSourceGroup": "本地测试,异常,超时",
+    "bookSourceUrl": "http://127.0.0.1:18080",
+    "bookSourceType": 0,
+    "bookSourceComment": "默认关闭。启用后 searchUrl 固定命中 mock 的 GET /broken（HTTP 500），用于验证源站 5xx 的错误处理与聚合搜索的降级。想做超时测试时把 searchUrl 换成 http://127.0.0.1:18080/slow?ms=3000&q={{key}}&charset=utf8（3 秒延迟），配合 /api/search 的 timeout 参数验证 TIMEOUT 分支。",
+    "customOrder": 5,
+    "enabled": false,
+    "enabledExplore": false,
+    "weight": 5,
+    "lastUpdateTime": 1735689600000,
+    "respondTime": 0,
+    "header": "",
+    "searchUrl": "http://127.0.0.1:18080/broken?q={{key}}&charset=utf8",
+    "exploreUrl": "",
+    "ruleSearch": {
+      "bookList": "class.book-list@class.book-item",
+      "name": "class.book-name@tag.a@text",
+      "author": "class.author@text##作者：##",
+      "kind": "class.kind@text##分类：##",
+      "wordCount": "class.word-count@text##字数：##",
+      "intro": "class.intro@text",
+      "lastChapter": "class.last-chapter@tag.a@text##最新章节：##",
+      "coverUrl": "class.cover@tag.img@src",
+      "bookUrl": "class.book-name@tag.a@href"
+    },
+    "ruleExplore": {},
+    "ruleBookInfo": {
+      "init": "",
+      "name": "class.book-title@text",
+      "author": "class.author@text",
+      "kind": "class.kind@text##分类：##",
+      "wordCount": "class.word-count@text##字数：##",
+      "status": "class.status@text##状态：##",
+      "intro": "id.intro@text",
+      "coverUrl": "class.book-cover@src",
+      "tocUrl": "class.toc@href",
+      "lastChapter": "class.last-chapter@tag.a@text##最新章节：##"
+    },
+    "ruleToc": {
+      "chapterList": "class.chapter-list@tag.ul@tag.li",
+      "chapterName": "tag.a@text",
+      "chapterUrl": "tag.a@href",
+      "nextTocUrl": "class.pager@class.next@href"
+    },
+    "ruleContent": {
+      "content": "id.content@html##<p[^>]*>(?:本站域名|手机用户请浏览|笔趣阁)[^<]*</p>##",
+      "title": "class.chapter-title@text",
+      "nextContentUrl": "id.next@href"
+    }
+  }
+]

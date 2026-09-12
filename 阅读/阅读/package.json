@@ -1,0 +1,28 @@
+{
+  "name": "shuhai",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "书海 —— 全网小说搜索与阅读服务，兼容阅读(Legado)书源，零依赖，Docker 一键部署",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node src/server.mjs",
+    "dev": "node --watch src/server.mjs",
+    "test": "node test/run-all.mjs",
+    "test:unit": "node test/unit-parser.mjs && node test/unit-rule.mjs",
+    "test:e2e": "node test/e2e.mjs",
+    "test:fixtures": "node test/fixtures-e2e.mjs",
+    "mock": "node test/mock-site/server.mjs"
+  },
+  "keywords": [
+    "novel",
+    "legado",
+    "booksource",
+    "reader",
+    "阅读",
+    "书源"
+  ],
+  "license": "MIT"
+}
