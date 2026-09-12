@@ -15,7 +15,7 @@
 ## 用法
 
 ```powershell
-# 默认：源码取 ..\阅读\阅读，产物写到 ..\dist\书海
+# 默认：源码取仓库根目录（本目录的上一级），产物写到 <仓库根>\dist\书海
 powershell -ExecutionPolicy Bypass -File build.ps1
 
 # 连现有书源数据一起打包（默认不带，保护你的书源和阅读记录）

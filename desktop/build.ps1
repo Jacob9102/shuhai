@@ -25,10 +25,11 @@ param(
 $ErrorActionPreference = 'Stop'
 
 $scriptDir = $PSScriptRoot
-$workspaceRoot = Split-Path $scriptDir -Parent
+# 仓库是摊平结构：desktop/ 与项目源码平级，都躺在仓库根目录下
+$projectRoot = Split-Path $scriptDir -Parent
 
-if (-not $SourceDir) { $SourceDir = Join-Path $workspaceRoot '阅读\阅读' }
-if (-not $OutDir)    { $OutDir    = Join-Path $workspaceRoot 'dist\书海' }
+if (-not $SourceDir) { $SourceDir = $projectRoot }
+if (-not $OutDir)    { $OutDir    = Join-Path $projectRoot 'dist\书海' }
 if (-not $NodeExe) {
     $nodeCmd = Get-Command node -ErrorAction SilentlyContinue
     if ($nodeCmd) { $NodeExe = $nodeCmd.Source } else { $NodeExe = 'C:\Program Files\nodejs\node.exe' }
@@ -44,7 +45,7 @@ if (-not (Test-Path $NodeExe)) {
 }
 
 $fullOut = [System.IO.Path]::GetFullPath($OutDir)
-$fullRoot = [System.IO.Path]::GetFullPath($workspaceRoot)
+$fullRoot = [System.IO.Path]::GetFullPath($projectRoot)
 if ($fullOut -eq $fullRoot -or -not $fullOut.StartsWith($fullRoot, [StringComparison]::OrdinalIgnoreCase)) {
     throw "输出目录必须位于 $fullRoot 之内，当前为 $fullOut"
 }
